@@ -87,6 +87,10 @@ python ota_tool.py ota -d "SMART IR" --key 00000000000000000000000000000000 -f s
 | 16 个 ASCII 字符 | 原样作为 16 字节 key |
 | 32 位 hex | 解析成 16 字节 key |
 
+交互模式下若该设备有之前保存的 key，会按可读形式预填（可见字符原样
+显示，全 0 key 显示为 `(zero key)`）；config.json 文件本身仍按 hex 存储
+（对二进制 key 也无歧义）。
+
 ## 设备记录（config.json）
 
 与脚本同目录。按设备 ID（14 位 hex）保存：设备名、IP、访问密钥（hex）、

@@ -105,6 +105,11 @@ password has the all-zero key). Three input forms are supported:
 | 16 ASCII characters | used verbatim as the 16-byte key |
 | 32 hex digits | parsed into the 16-byte key |
 
+In interactive mode a saved key is pre-filled in its readable form
+(visible characters as-is; the zero key shows as `(zero key)`);
+`config.json` itself still stores the key as hex (unambiguous even for
+binary keys).
+
 ## Device records (config.json)
 
 Next to the script. Keyed by device ID (14 hex chars): name, IP, access

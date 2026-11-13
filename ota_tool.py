@@ -228,7 +228,10 @@ def interactive():
         saved_key_hex = rec.get("key")
         saved_key = bytes.fromhex(saved_key_hex) if saved_key_hex else None
         while True:
-            default = (saved_key_hex
+            # pre-fill the saved key in its readable form (visible chars
+            # as-is, the zero key as "(zero key)"), not the hex storage
+            # form
+            default = (proto.describe_key(saved_key)
                        if saved_key else "(empty = zero key)")
             raw = input("access key of %s (%s)"
                         % (dev.name, ALPHABET_NOTE) + " [" + default + "]: ")
@@ -388,10 +391,10 @@ def build_parser():
 
 def main(argv=None):
     args = build_parser().parse_args(argv)
-    if getattr(args, "func", None) is None:
-        interactive()
-        return 0
     try:
+        if getattr(args, "func", None) is None:
+            interactive()
+            return 0
         return args.func(args)
     except (OSError, proto.ControlError, SystemExit) as e:
         if isinstance(e, SystemExit):
