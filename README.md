@@ -50,7 +50,7 @@ python ota_tool.py
 ```
 
 1. scans the LAN for 5 s and lists the online devices
-   (number / name / ID / IP)
+   (number / name / class / ID / IP)
 2. enter the device number (s = rescan, q = quit)
 3. enter the access key (16 bytes, see the format section below; empty
    = the all-zero key, which is what factory devices use; the key saved
@@ -75,6 +75,11 @@ python ota_tool.py ota -d <DEVICE> -f <FW>  run an OTA upgrade
 
 `-d <DEVICE>` accepts three forms: the device ID (14 hex chars, a unique
 prefix works), the device name, or the IP address.
+
+The device list shows each device's class (type) as `class=NN(NAME)`
+(e.g. `03(SMART_IR)`, `04(SENSOR)`, `06(SWITCH)`; the names follow the
+firmware's `class_id.h`), so you can confirm what kind of device you are
+about to upgrade straight from the printed list.
 
 Both `version` and `ota` accept `--key`; `-f` and `-p` are `ota`-only:
 
