@@ -194,8 +194,9 @@ def run_ota(dev, key, fw_path, ota_port, progress_title=""):
 
 def print_device_list(devices):
     for i, dev in enumerate(devices, 1):
-        safe_print("  [%d] %s  id=%s  ip=%s"
-                   % (i, pad(dev.name, 20), dev.dev_id, dev.ip))
+        safe_print("  [%d] %s  class=%02x(%s)  id=%s  ip=%s"
+                   % (i, pad(dev.name, 20), dev.class_id,
+                      proto.class_name(dev.class_id), dev.dev_id, dev.ip))
 
 
 def interactive():

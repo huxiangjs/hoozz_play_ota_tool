@@ -138,6 +138,23 @@ class DeviceInfo(object):
         return "DeviceInfo(%s, %r, %s)" % (self.dev_id, self.name, self.ip)
 
 
+# Device classes, kept in sync with the firmware's class_id.h
+CLASS_NAMES = {
+    0x00: "UNKNOWN",
+    0x01: "VOICE_LED",
+    0x02: "BUTTON_LED",
+    0x03: "SMART_IR",
+    0x04: "SENSOR",
+    0x05: "PWD_SYNC",
+    0x06: "SWITCH",
+}
+
+
+def class_name(class_id):
+    """The human-readable class name (the firmware's class_id.h)."""
+    return CLASS_NAMES.get(class_id, "UNKNOWN")
+
+
 def parse_discover(data):
     """Parse a "HOOZZ:..." discovery reply. Returns DeviceInfo or None
     (ip is filled in by the caller)."""
